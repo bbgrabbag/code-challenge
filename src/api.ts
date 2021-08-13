@@ -11,7 +11,7 @@ export const apiClient = (() => {
       `${API_URL}/search/users?q=${keyword} in:login&per_page=${RESULTS_PER_PAGE}`,
       { headers: defaultHeaders }
     );
-    if (response.status !== 200) throw new Error("There was a problem trieving your results. Please try again");
+    if (response.status !== 200) throw new Error("There was a problem retrieving your results. Please try again");
     const json = await response.json();
     return json.items.map(
       (result: any): ISearchResultData => ({
