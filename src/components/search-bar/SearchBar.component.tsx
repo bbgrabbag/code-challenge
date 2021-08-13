@@ -26,7 +26,8 @@ const useSearchForm = (config: SearchFormConfig) => {
 
   React.useEffect(() => {
     if (!isPristine && !keyword.length) config.onClear();
-    else if (keyword.length < MIN_KEYWORD_LENGTH) config.onIdle();
+    else if (keyword.length < MIN_KEYWORD_LENGTH && keyword.length > 0)
+      config.onIdle();
     else if (keyword.length >= MIN_KEYWORD_LENGTH) config.onSubmit(keyword);
   }, [config, keyword, isPristine]);
 
@@ -104,8 +105,13 @@ export const SearchBarComponent = () => {
   });
 
   return (
-    <form autoComplete="off" onSubmit={searchFormAPI.handleSubmit}>
+    <form
+      autoComplete="off"
+      onSubmit={searchFormAPI.handleSubmit}
+      data-testid="search-bar-component"
+    >
       <input
+        data-testid="search-input"
         name="keyword"
         onChange={searchFormAPI.handleChange}
         value={searchFormAPI.keyword}

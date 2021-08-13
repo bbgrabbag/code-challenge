@@ -7,28 +7,31 @@ export const SearchResultsComponent: React.FunctionComponent = () => {
 
   const renderList = () => (
     <div>
-      <p>Displaying {state.searchResults.data.length} results that match your query:</p>
-      <ul>
-      {state.searchResults.data.map((r, i) => (
-        <li key={i}>
-          <SearchResultComponent result={r}/>
-        </li>
-      ))}
-    </ul>
+      <p data-testid="results-status-text">
+        Displaying {state.searchResults.data.length} results that match your
+        query:
+      </p>
+      <ul data-testid="search-results-list">
+        {state.searchResults.data.map((r, i) => (
+          <li key={i}>
+            <SearchResultComponent result={r} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 
   const renderError = (message: string) => {
-    return <p>{message}</p>;
+    return <p data-testid="results-status-text">{message}</p>;
   };
 
   const renderLoading = () => {
-    return <p>...Searching</p>;
+    return <p data-testid="results-status-text">...Searching</p>;
   };
 
-  const renderIdle = (message: string) => { 
-    return (<p>{message}</p>)
-  }
+  const renderIdle = (message: string) => {
+    return <p data-testid="results-status-text">{message}</p>;
+  };
 
   const render = () => {
     if (state.searchResults.status === ESearchResultsStatus.ERROR) {
@@ -38,10 +41,10 @@ export const SearchResultsComponent: React.FunctionComponent = () => {
       return renderLoading();
     }
     if (state.searchResults.status === ESearchResultsStatus.IDLE) {
-      return renderIdle(state.searchResults.message)
+      return renderIdle(state.searchResults.message);
     }
     return renderList();
   };
 
-  return <div>{render()}</div>;
+  return <div data-testid="search-results-component">{render()}</div>;
 };
