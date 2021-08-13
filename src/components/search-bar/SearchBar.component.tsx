@@ -1,12 +1,23 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { throttleFactory } from "../../util";
-import { THROTTLE_TIMER } from "../../config";
+import { MIN_KEYWORD_LENGTH, THROTTLE_TIMER } from "../../config";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { apiClient } from "../../api";
+import {
+  clearSearchResults,
+  errorSearchResults,
+  getSearchResults,
+  idleSearchResults,
+  pendingSearchResults,
+} from "../../redux/actions";
+import { ESearchResultsStatus } from "../../redux/reducers";
 
 const throttler = throttleFactory(THROTTLE_TIMER);
 
 interface SearchFormConfig {
   onSubmit: (keyword: string) => void;
   onClear: () => void;
+  onPending: (keyword: string) => void;
 }
 
 const useSearchForm = (config: SearchFormConfig) => {
@@ -17,17 +28,19 @@ const useSearchForm = (config: SearchFormConfig) => {
     if (!isPristine && !keyword) {
       config.onClear();
     }
-    if (keyword) {
+    if (keyword.length >= MIN_KEYWORD_LENGTH) {
       config.onSubmit(keyword);
     }
   }, [config, keyword, isPristine]);
 
   const handleChange = React.useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setKeyword(e.target.value);
+      const inputValue = e.target.value;
+      setKeyword(inputValue);
+      config.onPending(inputValue);
       if (isPristine) setIsPristine(false);
     },
-    [isPristine]
+    [config, isPristine]
   );
 
   const handleSubmit = React.useCallback(
@@ -54,17 +67,41 @@ const useSearchForm = (config: SearchFormConfig) => {
 };
 
 export const SearchBarComponent = () => {
+  const dispatch = useAppDispatch();
+  const searchResultsStatus = useAppSelector(
+    (state) => state.searchResults.status
+  );
+
   const onClear = () => {
-    console.log("CLEARING FORM");
+    dispatch(clearSearchResults());
   };
 
-  const onSubmit = (keyword: string) => {
-    console.log("SUBMITTING", keyword);
+  const onSubmit = async (keyword: string) => {
+    try {
+      const results = await apiClient.search(keyword);
+      dispatch(getSearchResults(results));
+    } catch (e) {
+      console.error(e);
+      dispatch(errorSearchResults(e.message));
+    }
+  };
+
+  const onPending = (keyword: string) => {
+    if (searchResultsStatus !== ESearchResultsStatus.PENDING) {
+      if (keyword.length >= MIN_KEYWORD_LENGTH) {
+        dispatch(pendingSearchResults());
+      } else if (keyword.length > 0) {
+        dispatch(
+          idleSearchResults("Search query must contain at least 3 characters")
+        );
+      }
+    }
   };
 
   const searchFormAPI = useSearchForm({
     onSubmit: throttler(onSubmit),
     onClear: throttler(onClear),
+    onPending,
   });
 
   return (

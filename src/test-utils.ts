@@ -10,7 +10,7 @@ export const customRender: CustomRender = (ui) => {
   return render(ui, { wrapper: AppContainer });
 };
 
-export const mockAPI = () => {
+export const mockAPI = (() => {
 
   const generateID = (() => {
     let id = 0;
@@ -25,8 +25,9 @@ export const mockAPI = () => {
     return {
       avatar_url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/5.png',
       score: +Math.random().toFixed(2),
-      login: 'test-user-' + generateID(),
-      type: 'TEST'
+      login: 'test-user',
+      type: 'TEST',
+      id: generateID()
     }
   }
 
@@ -43,6 +44,8 @@ export const mockAPI = () => {
           clearTimeout(timeout);
         }, 1500)
       })
-    }
+    },
+    generateSearchResult,
+    generateSearchResults
   }
-}
+})();

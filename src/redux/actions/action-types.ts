@@ -1,17 +1,40 @@
 import { Action } from "@reduxjs/toolkit";
+import { ISearchResultData } from "../reducers";
 
 export const enum EActionTypes {
-//   TEST = "TEST",
+  GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS",
+  CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS",
+  PENDING_SEARCH_RESULTS = "PENDING_SEARCH_RESULTS",
+  IDLE_SEARCH_RESULTS = "IDLE_SEARCH_RESULTS",
+  ERROR_SEARCH_RESULTS = "ERROR_SEARCH_RESULTS",
 }
 
-export interface IAction<T extends EActionTypes = EActionTypes, P = {}> extends Action<T> {
+export interface IAction<T extends EActionTypes = EActionTypes, P = {}>
+  extends Action<T> {
   type: T;
   payload: P;
 }
 
-export type IActionCreator<A extends IAction> = (...args: any[]) => A | Promise<A>
+export type IActionCreator<A extends IAction> = (...args: any[]) => A;
 
 export interface IAppActionTypes
   extends Record<EActionTypes, IAction<EActionTypes>> {
-//   [EActionTypes.TEST]: IAction<EActionTypes.TEST, { foo: string }>;
+  [EActionTypes.GET_SEARCH_RESULTS]: IAction<
+    EActionTypes.GET_SEARCH_RESULTS,
+    { results: ISearchResultData[] }
+  >;
+  [EActionTypes.CLEAR_SEARCH_RESULTS]: IAction<EActionTypes.CLEAR_SEARCH_RESULTS>;
+  [EActionTypes.PENDING_SEARCH_RESULTS]: IAction<EActionTypes.PENDING_SEARCH_RESULTS>;
+  [EActionTypes.IDLE_SEARCH_RESULTS]: IAction<
+    EActionTypes.IDLE_SEARCH_RESULTS,
+    {
+      message: string;
+    }
+  >;
+  [EActionTypes.ERROR_SEARCH_RESULTS]: IAction<
+    EActionTypes.ERROR_SEARCH_RESULTS,
+    {
+      message: string;
+    }
+  >;
 }

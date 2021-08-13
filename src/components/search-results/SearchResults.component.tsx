@@ -1,4 +1,4 @@
-import { ISearchResultsStatus } from "../../redux/reducers";
+import { ESearchResultsStatus } from "../../redux/reducers";
 import { useAppSelector } from "../../hooks";
 import { SearchResultComponent } from "../search-result/SearchResult.component";
 
@@ -11,7 +11,7 @@ export const SearchResultsComponent: React.FunctionComponent = () => {
       <ul>
       {state.searchResults.data.map((r, i) => (
         <li key={i}>
-          <SearchResultComponent />
+          <SearchResultComponent result={r}/>
         </li>
       ))}
     </ul>
@@ -23,7 +23,7 @@ export const SearchResultsComponent: React.FunctionComponent = () => {
   };
 
   const renderLoading = () => {
-    return <p>...Loading</p>;
+    return <p>...Searching</p>;
   };
 
   const renderIdle = (message: string) => { 
@@ -31,13 +31,13 @@ export const SearchResultsComponent: React.FunctionComponent = () => {
   }
 
   const render = () => {
-    if (state.searchResults.status === ISearchResultsStatus.ERROR) {
+    if (state.searchResults.status === ESearchResultsStatus.ERROR) {
       return renderError(state.searchResults.message);
     }
-    if (state.searchResults.status === ISearchResultsStatus.PENDING) {
+    if (state.searchResults.status === ESearchResultsStatus.PENDING) {
       return renderLoading();
     }
-    if (state.searchResults.status === ISearchResultsStatus.IDLE) {
+    if (state.searchResults.status === ESearchResultsStatus.IDLE) {
       return renderIdle(state.searchResults.message)
     }
     return renderList();

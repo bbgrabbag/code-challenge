@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { AppComponent, AppContainer } from "./components/app/App.component";
