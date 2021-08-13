@@ -1,4 +1,4 @@
-import { ISearchResultsStatus } from "../../api";
+import { ISearchResultsStatus } from "../../redux/reducers";
 import { useAppSelector } from "../../hooks";
 import { SearchResultComponent } from "../search-result/SearchResult.component";
 

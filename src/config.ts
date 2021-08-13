@@ -1,0 +1,1 @@
+export const THROTTLE_TIMER = 500;

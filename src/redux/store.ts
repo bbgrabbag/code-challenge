@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from "@reduxjs/toolkit";
-import * as reducers from "./reducers/index";
+import { searchResultsReducer } from "./reducers/index";
 
 export const store = createStore(
   combineReducers({
-    searchResults: reducers.searchResultsReducer,
+    searchResults: searchResultsReducer,
   })
 );
 

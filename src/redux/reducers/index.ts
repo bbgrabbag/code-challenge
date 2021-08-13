@@ -1,5 +1,19 @@
-import { ISearchResultData, ISearchResultsStatus } from "../../api";
 import { IReducer } from "./reducer-types";
+
+export interface ISearchResultData {
+  avatar_url: string;
+  login: string;
+  type: string;
+  score: number;
+}
+
+export enum ISearchResultsStatus {
+  PENDING = "PENDING",
+  ERROR = "ERROR",
+  SUCCESS = "SUCCESS",
+  IDLE = "IDLE",
+}
+
 
 export interface ISearchResultsState {
   status: ISearchResultsStatus;
