@@ -1,16 +1,26 @@
-import { ISearchResultData } from "../../redux/reducers"
+import { ISearchResultData } from "../../redux/reducers";
+import Card from "react-bootstrap/Card";
 
 export interface ISearchResultComponentProps {
-    result: ISearchResultData;
+  result: ISearchResultData;
 }
 
-export const SearchResultComponent: React.FunctionComponent<ISearchResultComponentProps> = (props) => {
+export const SearchResultComponent: React.FunctionComponent<ISearchResultComponentProps> =
+  (props) => {
     return (
-        <div>
-            <h5>User: {props.result.login}</h5>
-            <p>Type: {props.result.type}</p>
-            <p>Search Score: {props.result.score}</p>
-            <img src={props.result.avatar_url} alt="user-avatar"></img>
-        </div>
-    )
-}
+      <Card className="margin-v hoverable">
+        <Card.Header>
+          <Card.Img
+            variant="top"
+            src={props.result.avatar_url}
+            alt="user-avatar"
+          />
+          <Card.Title>{props.result.login}</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <Card.Subtitle>{props.result.type}</Card.Subtitle>
+          <Card.Text>Search Score: {props.result.score}</Card.Text>
+        </Card.Body>
+      </Card>
+    );
+  };

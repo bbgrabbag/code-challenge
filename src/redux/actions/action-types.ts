@@ -15,16 +15,21 @@ export interface IAction<T extends EActionTypes = EActionTypes, P = {}>
   payload: P;
 }
 
-export type IActionCreator<A extends IAction> = (...args: any[]) => A;
+// export type IActionCreator<A extends IAction> = (...args: any[]) => A;
 
 export interface IAppActionTypes
   extends Record<EActionTypes, IAction<EActionTypes>> {
   [EActionTypes.GET_SEARCH_RESULTS]: IAction<
     EActionTypes.GET_SEARCH_RESULTS,
-    { results: ISearchResultData[] }
+    { results: ISearchResultData[]; message: string }
   >;
   [EActionTypes.CLEAR_SEARCH_RESULTS]: IAction<EActionTypes.CLEAR_SEARCH_RESULTS>;
-  [EActionTypes.PENDING_SEARCH_RESULTS]: IAction<EActionTypes.PENDING_SEARCH_RESULTS>;
+  [EActionTypes.PENDING_SEARCH_RESULTS]: IAction<
+    EActionTypes.PENDING_SEARCH_RESULTS,
+    {
+      message: string;
+    }
+  >;
   [EActionTypes.IDLE_SEARCH_RESULTS]: IAction<
     EActionTypes.IDLE_SEARCH_RESULTS,
     {

@@ -38,6 +38,7 @@ export const searchResultsReducer: IReducer<ISearchResultsState> = (
         ...state,
         data: action.payload.results,
         status: ESearchResultsStatus.SUCCESS,
+        message: action.payload.message
       };
     case EActionTypes.CLEAR_SEARCH_RESULTS:
       return initialSearchResultsState;
@@ -45,6 +46,7 @@ export const searchResultsReducer: IReducer<ISearchResultsState> = (
       return {
         ...state,
         status: ESearchResultsStatus.PENDING,
+        message: action.payload.message,
       };
     case EActionTypes.IDLE_SEARCH_RESULTS:
       return {

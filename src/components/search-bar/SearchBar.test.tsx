@@ -4,13 +4,15 @@ import { SearchBarComponent } from "./SearchBar.component";
 
 const setup = async () => {
   const searchBar = customRender(<SearchBarComponent />);
-  const input = searchBar.container.querySelector('input[name="keyword"]');
-  const btn = searchBar.container.querySelector("button");
+  const form = await searchBar.findByTestId('search-bar-component');
+  const input = await searchBar.findByTestId('search-input');
+  const btn = await searchBar.findByTestId('clear-search');
 
   return {
     searchBar,
     input,
     btn,
+    form
   };
 };
 
@@ -18,10 +20,11 @@ const setup = async () => {
 describe("SearchBar Component", () => {
   test("Should initialize", async () => {
     const testBed = await setup();
-    expect(testBed.searchBar.container.firstElementChild).toBeInstanceOf(
+
+    expect(testBed.form).toBeInstanceOf(
       HTMLFormElement
     );
-    expect(testBed.searchBar.container.firstElementChild).toHaveFormValues({
+    expect(testBed.form).toHaveFormValues({
       keyword: "",
     });
   });

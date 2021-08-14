@@ -10,6 +10,10 @@ import {
   idleSearchResults,
   pendingSearchResults,
 } from "../../redux/actions";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const throttler = throttleFactory(THROTTLE_TIMER);
 
@@ -77,7 +81,7 @@ export const SearchBarComponent = () => {
     throttler(async () => {
       try {
         const results = await apiClient.search(keyword);
-        dispatch(getSearchResults(results));
+        dispatch(getSearchResults(results, `Displaying ${results.length} results that match your query`));
       } catch (e) {
         console.error(e);
         dispatch(errorSearchResults(e.message));
@@ -94,7 +98,7 @@ export const SearchBarComponent = () => {
   };
 
   const onPending = () => {
-    dispatch(pendingSearchResults());
+    dispatch(pendingSearchResults("Searching..."));
   };
 
   const searchFormAPI = useSearchForm({
@@ -105,21 +109,33 @@ export const SearchBarComponent = () => {
   });
 
   return (
-    <form
+    <Form
       autoComplete="off"
       onSubmit={searchFormAPI.handleSubmit}
       data-testid="search-bar-component"
     >
-      <input
-        data-testid="search-input"
-        name="keyword"
-        onChange={searchFormAPI.handleChange}
-        value={searchFormAPI.keyword}
-        placeholder="Search GitHub users"
-      />
-      <button type="button" onClick={searchFormAPI.clearInput}>
-        Clear
-      </button>
-    </form>
+      <Form.Group as={Row} className="flex-align-cv">
+        <Col xs="12"md="9">
+          <Form.Control
+            name="keyword"
+            data-testid="search-input"
+            onChange={searchFormAPI.handleChange}
+            value={searchFormAPI.keyword}
+            placeholder="Search"
+          />
+        </Col>
+        <Col xs="12" md="3">
+          <Button
+            className="full-width margin-v"
+            data-testid="clear-search"
+            type="button"
+            variant="secondary"
+            onClick={searchFormAPI.clearInput}
+          >
+            Clear Search
+          </Button>
+        </Col>
+      </Form.Group>
+    </Form>
   );
 };

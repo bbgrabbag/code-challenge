@@ -57,7 +57,7 @@ describe("App Component", () => {
       "results-status-text"
     );
     fireEvent.change(testBed.input, { target: { value: "test" } });
-    expect(searchStatusText.innerHTML).toBe("...Searching");
+    expect(searchStatusText.innerHTML).toBe("Searching...");
   });
 
   test("Should display results text on keywords longer than 3 after timeout", async () => {
@@ -69,7 +69,7 @@ describe("App Component", () => {
           "results-status-text"
         );
         expect(searchStatusText.innerHTML).toMatch(
-          /(Displaying)*(results that match your query:)/
+          /(Displaying)*(results that match your query)/
         );
       },
       { timeout: 2000 }

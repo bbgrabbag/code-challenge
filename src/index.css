@@ -4,4 +4,38 @@
 
 body {
   margin: 0;
+  padding: 1rem;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.margin-v{
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.flex{
+  display: flex;
+}
+
+.flex-align-ch{
+  justify-content: center;
+}
+
+.flex-align-cv{
+  align-items: center;
+}
+
+.hoverable:hover{
+  background-color:rgb(228, 233, 238); 
+}
+
+.font-sm{
+  font-size: 12px;
+}
+
+.italic{
+  font-style: italic;
 }
