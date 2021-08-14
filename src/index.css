@@ -12,8 +12,8 @@ body {
 }
 
 .margin-v{
-  margin-top: 3px;
-  margin-bottom: 3px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 .flex{
@@ -38,4 +38,9 @@ body {
 
 .italic{
   font-style: italic;
+}
+
+.logo-sm{
+  margin: auto;
+  width: 3rem;
 }

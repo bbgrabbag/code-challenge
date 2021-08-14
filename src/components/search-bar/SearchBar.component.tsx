@@ -121,7 +121,7 @@ export const SearchBarComponent = () => {
             data-testid="search-input"
             onChange={searchFormAPI.handleChange}
             value={searchFormAPI.keyword}
-            placeholder="Search"
+            placeholder="Search by username"
           />
         </Col>
         <Col xs="12" md="3">
