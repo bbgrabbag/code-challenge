@@ -16,7 +16,12 @@ export const SearchResultsComponent: React.FunctionComponent = () => {
           <Container data-testid="search-results-list">
             <Row>
               {state.searchResults.data.map((r, i) => (
-                <Col xs={{span: 10, offset: 1}} sm={{span: 6, offset: 0}} lg={3} key={i}>
+                <Col
+                  xs={{ span: 10, offset: 1 }}
+                  sm={{ span: 6, offset: 0 }}
+                  lg={3}
+                  key={i}
+                >
                   <SearchResultComponent result={r} />
                 </Col>
               ))}

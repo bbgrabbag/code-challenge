@@ -1,27 +1,30 @@
 import { ISearchResultData } from "../reducers";
-import {
-  EActionTypes,
-  IAppActionTypes,
-} from "./action-types";
+import { EActionTypes, IAppActionTypes } from "./action-types";
 
-export const getSearchResults = (results: ISearchResultData[], message: string): IAppActionTypes[EActionTypes.GET_SEARCH_RESULTS] => {
+export const getSearchResults = (
+  results: ISearchResultData[],
+  message: string
+): IAppActionTypes[EActionTypes.GET_SEARCH_RESULTS] => {
   return {
     type: EActionTypes.GET_SEARCH_RESULTS,
-    payload: { 
-      results, 
-      message
+    payload: {
+      results,
+      message,
     },
   };
 };
 
-export const clearSearchResults = (): IAppActionTypes[EActionTypes.CLEAR_SEARCH_RESULTS] => {
-  return {
-    type: EActionTypes.CLEAR_SEARCH_RESULTS,
-    payload: {},
+export const clearSearchResults =
+  (): IAppActionTypes[EActionTypes.CLEAR_SEARCH_RESULTS] => {
+    return {
+      type: EActionTypes.CLEAR_SEARCH_RESULTS,
+      payload: {},
+    };
   };
-};
 
-export const pendingSearchResults = (message: string): IAppActionTypes[EActionTypes.PENDING_SEARCH_RESULTS] => {
+export const pendingSearchResults = (
+  message: string
+): IAppActionTypes[EActionTypes.PENDING_SEARCH_RESULTS] => {
   return {
     type: EActionTypes.PENDING_SEARCH_RESULTS,
     payload: {
@@ -30,7 +33,9 @@ export const pendingSearchResults = (message: string): IAppActionTypes[EActionTy
   };
 };
 
-export const idleSearchResults = (message: string): IAppActionTypes[EActionTypes.IDLE_SEARCH_RESULTS] => {
+export const idleSearchResults = (
+  message: string
+): IAppActionTypes[EActionTypes.IDLE_SEARCH_RESULTS] => {
   return {
     type: EActionTypes.IDLE_SEARCH_RESULTS,
     payload: {
@@ -39,7 +44,9 @@ export const idleSearchResults = (message: string): IAppActionTypes[EActionTypes
   };
 };
 
-export const errorSearchResults = (message: string): IAppActionTypes[EActionTypes.ERROR_SEARCH_RESULTS] => {
+export const errorSearchResults = (
+  message: string
+): IAppActionTypes[EActionTypes.ERROR_SEARCH_RESULTS] => {
   return {
     type: EActionTypes.ERROR_SEARCH_RESULTS,
     payload: {

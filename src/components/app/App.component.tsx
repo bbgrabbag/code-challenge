@@ -7,16 +7,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import github_logo from '../../assets/images/github-logo.png'
+import github_logo from "../../assets/images/github-logo.png";
 
 export const AppComponent = () => {
   return (
     <Container>
       <Row as="header">
-        <Col xs={12}className=".flex-align-ch flex margin-v">
-          <Image src={github_logo} className="logo-sm"/>
+        <Col xs={12} className=".flex-align-ch flex margin-v">
+          <Image src={github_logo} className="logo-sm" />
         </Col>
-        <Col xs={12}><SearchBarComponent /></Col>
+        <Col xs={12}>
+          <SearchBarComponent />
+        </Col>
       </Row>
       <Row as="main">
         <SearchResultsComponent />

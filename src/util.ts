@@ -3,7 +3,10 @@ export const throttleFactory = (ms: number) => {
   return (cb: (...args: any) => any, overrideMs?: number) => {
     return (...args: Parameters<typeof cb>): NodeJS.Timeout => {
       clearTimeout(timeout);
-      timeout = setTimeout((() => cb(...args)), overrideMs !== undefined ? overrideMs : ms);
+      timeout = setTimeout(
+        () => cb(...args),
+        overrideMs !== undefined ? overrideMs : ms
+      );
       return timeout;
     };
   };

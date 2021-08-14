@@ -38,7 +38,7 @@ export const searchResultsReducer: IReducer<ISearchResultsState> = (
         ...state,
         data: action.payload.results,
         status: ESearchResultsStatus.SUCCESS,
-        message: action.payload.message
+        message: action.payload.message,
       };
     case EActionTypes.CLEAR_SEARCH_RESULTS:
       return initialSearchResultsState;

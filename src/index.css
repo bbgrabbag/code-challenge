@@ -7,40 +7,40 @@ body {
   padding: 1rem;
 }
 
-.full-width{
+.full-width {
   width: 100%;
 }
 
-.margin-v{
+.margin-v {
   margin-top: 6px;
   margin-bottom: 6px;
 }
 
-.flex{
+.flex {
   display: flex;
 }
 
-.flex-align-ch{
+.flex-align-ch {
   justify-content: center;
 }
 
-.flex-align-cv{
+.flex-align-cv {
   align-items: center;
 }
 
-.hoverable:hover{
-  background-color:rgb(228, 233, 238); 
+.hoverable:hover {
+  background-color: rgb(228, 233, 238);
 }
 
-.font-sm{
+.font-sm {
   font-size: 12px;
 }
 
-.italic{
+.italic {
   font-style: italic;
 }
 
-.logo-sm{
+.logo-sm {
   margin: auto;
   width: 3rem;
 }

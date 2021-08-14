@@ -81,7 +81,12 @@ export const SearchBarComponent = () => {
     throttler(async () => {
       try {
         const results = await apiClient.search(keyword);
-        dispatch(getSearchResults(results, `Displaying ${results.length} results that match your query`));
+        dispatch(
+          getSearchResults(
+            results,
+            `Displaying ${results.length} results that match your query`
+          )
+        );
       } catch (e) {
         console.error(e);
         dispatch(errorSearchResults(e.message));
@@ -115,7 +120,7 @@ export const SearchBarComponent = () => {
       data-testid="search-bar-component"
     >
       <Form.Group as={Row} className="flex-align-cv">
-        <Col xs="12"md="9">
+        <Col xs="12" md="9">
           <Form.Control
             name="keyword"
             data-testid="search-input"

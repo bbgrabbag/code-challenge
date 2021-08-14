@@ -15,8 +15,6 @@ export interface IAction<T extends EActionTypes = EActionTypes, P = {}>
   payload: P;
 }
 
-// export type IActionCreator<A extends IAction> = (...args: any[]) => A;
-
 export interface IAppActionTypes
   extends Record<EActionTypes, IAction<EActionTypes>> {
   [EActionTypes.GET_SEARCH_RESULTS]: IAction<
