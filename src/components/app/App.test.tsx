@@ -63,11 +63,11 @@ describe("App Component", () => {
   test("Should display results text on keywords longer than 3 after timeout", async () => {
     const testBed = await setup();
     fireEvent.change(testBed.input, { target: { value: "test" } });
+    const searchStatusText = await testBed.app.findByTestId(
+      "results-status-text"
+    );
     await waitFor(
       async () => {
-        const searchStatusText = await testBed.app.findByTestId(
-          "results-status-text"
-        );
         expect(searchStatusText.innerHTML).toMatch(
           /(Displaying)*(results that match your query)/
         );
