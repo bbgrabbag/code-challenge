@@ -54,11 +54,3 @@ export const errorSearchResults = (
     },
   };
 };
-
-export const actionCreators = {
-  [EActionTypes.GET_SEARCH_RESULTS]: getSearchResults,
-  [EActionTypes.CLEAR_SEARCH_RESULTS]: clearSearchResults,
-  [EActionTypes.PENDING_SEARCH_RESULTS]: pendingSearchResults,
-  [EActionTypes.IDLE_SEARCH_RESULTS]: idleSearchResults,
-  [EActionTypes.ERROR_SEARCH_RESULTS]: errorSearchResults,
-};
